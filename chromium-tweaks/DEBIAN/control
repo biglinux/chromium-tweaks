@@ -1,0 +1,11 @@
+Package: chromium-tweaks
+Version: 1.0.1-1big2
+Conflicts: chromium-browser-tweaks, chromium-browser
+Depends: chromium, chromium-l10n
+Architecture: all
+Maintainer: Bruno Goncalves <www.biglinux.com.br>
+Section: admin
+Priority: optional
+Installed-Size:20
+Description: Make chromium browser better
+

@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+package_name=chromium-tweaks
+
+
+case "$1" in
+  remove)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/chromium"
+    ;;
+  purge)
+    dpkg-divert --package "$package_name" --rename --remove "/usr/bin/chromium"
+;;
+esac
+exit 0
