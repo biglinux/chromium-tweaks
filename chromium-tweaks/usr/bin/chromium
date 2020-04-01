@@ -80,4 +80,4 @@ esac
 # Stop Widevine search
 ######################
 
-exec /usr/bin/chromium-browser.orig --process-per-site --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
+exec /usr/bin/chromium.orig --process-per-site --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
