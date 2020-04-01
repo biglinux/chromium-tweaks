@@ -11,6 +11,9 @@ BRAVE="$(grep '"version":' ~/.config/BraveSoftware/Brave-Browser/WidevineCdm/man
 FIREFOX="$(grep '"version":' ~/.mozilla/firefox/*.default/gmp-widevinecdm/*/manifest.json 2> /dev/null | cut -f4 -d\")"
 NETFLIX="$(grep '"version":' ~/.netflix/gmp-widevinecdm/*/manifest.json 2> /dev/null | cut -f4 -d\")"
 NFHD="$(grep '"version":' ~/.netflix-1080/gmp-widevinecdm/*/manifest.json 2> /dev/null | cut -f4 -d\")"
+SPOTIFY="$(grep '"version":' ~/.spotify/gmp-widevinecdm/*/manifest.json 2> /dev/null | cut -f4 -d\")"
+PRIME="$(grep '"version":' ~/.primevideo/gmp-widevinecdm/*/manifest.json 2> /dev/null | cut -f4 -d\")"
+
 
 
 # Search for the latest version of widevine in various folders, then select the most recent in the WIDEVINE variable
@@ -18,7 +21,9 @@ WIDEVINE="$(echo "$CHROME CHROME
 $BRAVE BRAVE
 $FIREFOX FIREFOX
 $NETFLIX NETFLIX
-$NFHD NFHD" | sort -r | grep -m1 [0-9] | cut -f2 -d" ")"
+$NFHD NFHD
+$SPOTIFY SPOTIFY
+$PRIME PRIME" | sort -r | grep -m1 [0-9] | cut -f2 -d" ")"
 
 
 case "$WIDEVINE" in
@@ -53,6 +58,21 @@ case "$WIDEVINE" in
         mkdir -p "$FOLDER/_platform_specific/linux_x64"
         ln -sf "$FOLDER/libwidevinecdm.so" "$FOLDER/_platform_specific/linux_x64/libwidevinecdm.so"
     ;;
+    
+    SPOTIFY)
+        FOLDER="$(file ~/.spotify/gmp-widevinecdm/*/ | cut -f1 -d:)"
+        echo "{\"Path\":\"$FOLDER\"}" > ~/.config/chromium/WidevineCdm/latest-component-updated-widevine-cdm
+        mkdir -p "$FOLDER/_platform_specific/linux_x64"
+        ln -sf "$FOLDER/libwidevinecdm.so" "$FOLDER/_platform_specific/linux_x64/libwidevinecdm.so"
+    ;;
+
+    PRIME)
+        FOLDER="$(file ~/.primevideo/gmp-widevinecdm/*/ | cut -f1 -d:)"
+        echo "{\"Path\":\"$FOLDER\"}" > ~/.config/chromium/WidevineCdm/latest-component-updated-widevine-cdm
+        mkdir -p "$FOLDER/_platform_specific/linux_x64"
+        ln -sf "$FOLDER/libwidevinecdm.so" "$FOLDER/_platform_specific/linux_x64/libwidevinecdm.so"
+    ;;
+
 
 esac
 
@@ -60,4 +80,4 @@ esac
 # Stop Widevine search
 ######################
 
-exec /usr/bin/chromium.orig --process-per-site --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
+exec /usr/bin/chromium-browser.orig --process-per-site --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
