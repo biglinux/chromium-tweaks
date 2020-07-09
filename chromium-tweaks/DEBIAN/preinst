@@ -2,6 +2,9 @@
 set -e
 package_name=chromium-tweaks
 mkdir -p "/usr/share/dpkgdivert/chromium-tweaks"
+
+ln -sf /usr/bin/chromium /usr/bin/chromium-browser
+
 case "$1" in
   install)
     dpkg-divert --package "$package_name" --divert "/usr/bin/chromium.orig" --rename "/usr/bin/chromium"

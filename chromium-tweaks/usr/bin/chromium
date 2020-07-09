@@ -76,8 +76,49 @@ case "$WIDEVINE" in
 
 esac
 
+
 ######################
 # Stop Widevine search
 ######################
 
-exec /usr/bin/chromium.orig --process-per-site --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
+
+
+######################
+# Start optimization
+######################
+
+OPTIMIZATION="$(cat ~/.config/chromium-optimize)"
+
+if [ "$OPTIMIZATION" = "" ]
+then
+
+    if [ "$(systemd-detect-virt)" = "none" ]; then
+        echo "performance" > ~/.config/chromium-optimize
+    else
+        echo "normal" > ~/.config/chromium-optimize
+    fi
+
+fi
+
+if [ "$OPTIMIZATION" = "performance" ]
+then
+
+    PARAMETERS="--enable-accelerated-2d-canvas --enable-accelerated-mjpeg-decode --enable-accelerated-video --enable-features=MarkHttpAs,StrictOriginIsolation --enable-gpu-memory-buffer-compositor-resources --enable-gpu-memory-buffer-video-frames --enable-gpu-rasterization --enable-quic --use-vulkan --ignore-gpu-blacklist --enable-parallel-downloading"
+
+elif [ "$OPTIMIZATION" = "optimize" ]
+then
+
+    PARAMETERS="--enable-accelerated-2d-canvas --enable-accelerated-mjpeg-decode --enable-accelerated-video --enable-features=MarkHttpAs,StrictOriginIsolation --enable-gpu-memory-buffer-compositor-resources --enable-gpu-memory-buffer-video-frames --enable-gpu-rasterization --enable-quic --use-vulkan --enable-parallel-downloading"
+
+else
+
+    PARAMETERS=""
+
+fi
+
+######################
+# Stop optimization
+######################
+
+
+exec /usr/bin/chromium.orig --process-per-site $PARAMETERS --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/637.36 (KHTML, like Gecko) Chrome/98.0.3202.97 Safari/637.36" ${1+"$@"}
