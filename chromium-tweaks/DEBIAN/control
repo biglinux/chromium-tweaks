@@ -1,5 +1,5 @@
 Package: chromium-tweaks
-Version: 1.0.2-1big1
+Version: 1.0.2-1big3
 Conflicts: chromium-browser-tweaks, chromium-browser
 Depends: chromium, chromium-l10n, vdpau-va-driver
 Architecture: all
