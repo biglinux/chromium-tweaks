@@ -89,7 +89,6 @@ esac
 
 OPTIMIZATION="$(cat ~/.config/chromium-optimize)"
 VAINFO="$(vainfo 2>&1)"
-grep VAProfileVC1Advanced
 
 if [ "$OPTIMIZATION" = "" ]
 then
