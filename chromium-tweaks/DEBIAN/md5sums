@@ -1,5 +1,5 @@
 d41d8cd98f00b204e9800998ecf8427e  DEBIAN/md5sums
 c0d93691c6fb9d24af5a983212a879e3  DEBIAN/preinst
 abc02114440ee7b824ee9d477f39c07e  DEBIAN/postrm
-ef2f8595f83484a494ab92a79c36aee3  DEBIAN/control
-c10b3069893ebe5c284f03781dc73e6b  usr/bin/chromium
+8a86562832b353e2c59fd6276759db6d  DEBIAN/control
+f68cd9ab25eefd05b0329e6c9e2d9f78  usr/bin/chromium

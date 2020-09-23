@@ -88,14 +88,17 @@ esac
 ######################
 
 OPTIMIZATION="$(cat ~/.config/chromium-optimize)"
+VAINFO="$(vainfo 2>&1)"
+grep VAProfileVC1Advanced
 
 if [ "$OPTIMIZATION" = "" ]
 then
-
-    if [ "$(systemd-detect-virt)" = "none" ]; then
+    if [ "$(systemd-detect-virt)" = "none" ] || [ "$(echo "$VAINFO" | grep nvidia)" = "" ] || [ "$(echo "$VAINFO" | grep nouveau)" = "" ] || [ "$(echo "$VAINFO" | grep VAProfileVC1Advanced)" != "" ]; then
         echo "performance" > ~/.config/chromium-optimize
+        OPTIMIZATION="performance"
     else
         echo "normal" > ~/.config/chromium-optimize
+        OPTIMIZATION="normal"
     fi
 
 fi
