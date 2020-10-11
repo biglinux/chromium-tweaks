@@ -87,6 +87,12 @@ esac
 # Start optimization
 ######################
 
+# Fix to intel gpu
+if [ "$(lspci | grep 'UHD Graphics 605')" != "" ]; then
+    export LIBVA_DRIVER_NAME=i965
+fi
+
+
 OPTIMIZATION="$(cat ~/.config/chromium-optimize)"
 VAINFO="$(vainfo 2>&1)"
 
