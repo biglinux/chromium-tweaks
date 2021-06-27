@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+package_name=brave-tweaks
+mkdir -p "/usr/share/dpkgdivert/brave-tweaks"
+
+
+case "$1" in
+  install)
+    dpkg-divert --package "$package_name" --divert "/usr/bin/brave-browser-stable.orig" --rename "/usr/bin/brave-browser-stable"
+#    dpkg-divert --package "$package_name" --divert "/usr/share/applications/chromium-browser.desktop" --rename "/usr/share/applications/chromium.desktop"
+    ;;
+  upgrade)
+# if [ "$(dpkg-divert --list "/usr/share/applications/chromium.desktop")" = "" ]
+# then
+#     dpkg-divert --package "$package_name" --divert "/usr/share/applications/chromium-browser.desktop" --rename "/usr/share/applications/chromium.desktop"
+# fi
+if [ "$(dpkg-divert --list "/usr/bin/brave-browser-stable")" = "" ]
+then
+    dpkg-divert --package "$package_name" --divert "/usr/bin/brave-browser-stable.orig" --rename "/usr/bin/brave-browser-stable"
+fi
+;;
+esac
+exit 0

@@ -1,0 +1,10 @@
+Package: brave-tweaks
+Version: 1.0.3-1big3
+Depends: brave-browser, vdpau-va-driver
+Architecture: all
+Maintainer: Bruno Goncalves <www.biglinux.com.br>
+Section: admin
+Priority: optional
+Installed-Size:20
+Description: Make brave browser better
+

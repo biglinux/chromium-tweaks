@@ -1,0 +1,5 @@
+d41d8cd98f00b204e9800998ecf8427e  DEBIAN/md5sums
+d74c96f59e4a1f413bf325b6139c28e5  DEBIAN/preinst
+9ccb6c9ace801fdf7980241179d87f13  DEBIAN/postrm
+51f22c2d81b1a1d24804ad84a49dba03  DEBIAN/control
+f98106b1c66a94d2d09df15905c8e868  usr/bin/brave-browser-stable
